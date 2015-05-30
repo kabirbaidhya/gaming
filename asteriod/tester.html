@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	.box {
+		position: absolute;
+		background: red;
+		height: 50px;
+		width: 50px;
+		left: 200px;
+		top: 200px;
+	}
+	#box2 {
+		left: 100px;
+		top: 150px;
+		background: blue;
+	}
+	</style>
+</head>
+<body>
+
+<span id="label"></span>
+	<div id="box1" class="box"></div>
+	<div id="box2" class="box"></div>
+
+	<script type="text/javascript">
+		var box2 = document.getElementById('box2');
+		var box1 = document.getElementById('box1');
+		var label = document.getElementById('label');
+
+	 	var pos = {
+	 		top: 0,
+	 		right: 0,
+	 		bottom: 0,
+	 		left: 0
+	 	};
+
+	 	var pos2 = {
+	 		top: 200,
+	 		right: 200,
+	 		bottom: 200,
+	 		left: 200
+	 	};
+
+
+	 	function hasColided(obj1, obj2) {
+			var c1, c2, c3, c4;
+			var condition = (
+				// (c1 = (obj1.right >= obj2.left && obj1.right <= obj2.right)) ||
+				// (c2 = (obj1.top <= obj2.bottom && obj2.top <= obj1.top)) ||
+				// (c3 = (obj1.bottom >= obj2.top && obj1.top <= obj2.top)) ||
+				// (c4 = (obj1.left <= obj2.right && obj2.left <= obj1.left))
+				
+				(c1 = (obj1.left >= obj2.left && obj1.left <= obj2.right)) ||
+				(c2 = (obj1.bottom >= obj2.top && obj1.bottom <= obj2.bottom)) ||
+				(c3 = (obj1.right >= obj2.left && obj1.left <= obj2.right)) ||
+				(c4 = (obj1.top >= obj2.top && obj1.top <= obj2.bottom))
+			);
+
+			label.innerText = 'colided = ' + (condition ? 'true' : 'false');
+			console.log('colided =', condition, obj1, obj2);
+			console.log(c1, c2, c3, c4);
+
+			return condition;
+		}
+
+		var d = 10;
+		document.onkeyup = KeyCheck;       
+
+		box2.style.top = pos2.top + 'px';
+	 	box2.style.right = pos2.right + 'px';
+	 	box2.style.bottom = pos2.bottom + 'px';
+	 	box2.style.left = pos2.left + 'px';
+
+		function KeyCheck() {
+
+		 	var KeyID = event.keyCode;
+
+		 	box1.style.top = pos.top + 'px';
+		 	box1.style.right = pos.right + 'px';
+		 	box1.style.bottom = pos.bottom + 'px';
+		 	box1.style.left = pos.left + 'px';
+
+
+		  switch(KeyID)
+		  {
+
+			  case 37:
+
+			  //right('img');
+			  pos.left -= d;
+
+			  break;
+
+			  case 38:
+
+			  pos.top -= d;
+			  // up('img')
+
+			  break
+
+			  case 39:
+
+			  pos.left += d;
+			  // left('img');
+
+			  break;
+
+			  case 40:
+
+			  pos.top += d;
+			  // down('img');
+
+			  break;
+		  }
+			box1.style.top = pos.top + 'px';
+		 	box1.style.right = pos.right + 'px';
+		 	box1.style.bottom = pos.bottom + 'px';
+		 	box1.style.left = pos.left + 'px';		  
+
+		 	hasColided(pos, pos2);
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+body {
+	padding: 0;
+	margin: 0;
+}
+
+#container {
+	border: 1px solid;
+	position: relative;
+	margin: 10px auto;
+}
+#bubble {
+	background-color: #888;
+	border-radius: 50%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
