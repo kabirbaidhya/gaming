@@ -6,14 +6,8 @@
 	.box {
 		position: absolute;
 		background: red;
-		height: 50px;
-		width: 50px;
-		left: 200px;
-		top: 200px;
 	}
 	#box2 {
-		left: 100px;
-		top: 150px;
 		background: blue;
 	}
 	</style>
@@ -30,94 +24,87 @@
 		var label = document.getElementById('label');
 
 	 	var pos = {
-	 		top: 0,
-	 		right: 0,
-	 		bottom: 0,
-	 		left: 0
+	 		x:0,
+	 		y: 0,
+	 		height: 50,
+	 		width: 50
 	 	};
 
 	 	var pos2 = {
-	 		top: 200,
-	 		right: 200,
-	 		bottom: 200,
-	 		left: 200
+	 		x: 200,
+	 		y: 200,
+	 		height: 50,
+	 		width: 50
 	 	};
 
 
-	 	function hasColided(obj1, obj2) {
-			var c1, c2, c3, c4;
-			var condition = (
-				// (c1 = (obj1.right >= obj2.left && obj1.right <= obj2.right)) ||
-				// (c2 = (obj1.top <= obj2.bottom && obj2.top <= obj1.top)) ||
-				// (c3 = (obj1.bottom >= obj2.top && obj1.top <= obj2.top)) ||
-				// (c4 = (obj1.left <= obj2.right && obj2.left <= obj1.left))
-				
-				(c1 = (obj1.left >= obj2.left && obj1.left <= obj2.right)) ||
-				(c2 = (obj1.bottom >= obj2.top && obj1.bottom <= obj2.bottom)) ||
-				(c3 = (obj1.right >= obj2.left && obj1.left <= obj2.right)) ||
-				(c4 = (obj1.top >= obj2.top && obj1.top <= obj2.bottom))
-			);
+		function hasColided(a, b) {
 
+		    var condition = !(
+		        ((a.y + a.height) < (b.y)) ||
+		        (a.y > (b.y + b.height)) ||
+		        ((a.x + a.width) < b.x) ||
+		        (a.x > (b.x + b.width))
+		    );
+
+		    console.log('cond = ', condition);
 			label.innerText = 'colided = ' + (condition ? 'true' : 'false');
-			console.log('colided =', condition, obj1, obj2);
-			console.log(c1, c2, c3, c4);
 
-			return condition;
+		    return condition;
 		}
 
 		var d = 10;
-		document.onkeyup = KeyCheck;       
 
-		box2.style.top = pos2.top + 'px';
-	 	box2.style.right = pos2.right + 'px';
-	 	box2.style.bottom = pos2.bottom + 'px';
-	 	box2.style.left = pos2.left + 'px';
+		box2.style.top = pos2.y + 'px';
+	 	box2.style.left = pos2.x + 'px';
+	 	box2.style.width = pos2.width + 'px';
+	 	box2.style.height = pos2.height + 'px';
 
-		function KeyCheck() {
+		document.onkeydown =function () {
 
 		 	var KeyID = event.keyCode;
 
-		 	box1.style.top = pos.top + 'px';
-		 	box1.style.right = pos.right + 'px';
-		 	box1.style.bottom = pos.bottom + 'px';
-		 	box1.style.left = pos.left + 'px';
+		 	box1.style.top = pos.y + 'px';
+		 	box1.style.left = pos.x + 'px';
+		 	box1.style.width = pos.width + 'px';
+		 	box1.style.height = pos.height + 'px';
 
 
-		  switch(KeyID)
-		  {
+		  	switch(KeyID)
+		  	{
 
 			  case 37:
 
 			  //right('img');
-			  pos.left -= d;
+			  pos.x -= d;
 
 			  break;
 
 			  case 38:
 
-			  pos.top -= d;
+			  pos.y -= d;
 			  // up('img')
 
 			  break
 
 			  case 39:
 
-			  pos.left += d;
+			  pos.x += d;
 			  // left('img');
 
 			  break;
 
 			  case 40:
 
-			  pos.top += d;
+			  pos.y += d;
 			  // down('img');
 
 			  break;
 		  }
-			box1.style.top = pos.top + 'px';
-		 	box1.style.right = pos.right + 'px';
-		 	box1.style.bottom = pos.bottom + 'px';
-		 	box1.style.left = pos.left + 'px';		  
+			box1.style.top = pos.y + 'px';
+		 	box1.style.left = pos.x + 'px';
+		 	box1.style.width = pos.width + 'px';
+		 	box1.style.height = pos.height + 'px';		  
 
 		 	hasColided(pos, pos2);
 		}

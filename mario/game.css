@@ -1,0 +1,71 @@
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+/* start commented backslash hack \*/
+* html .clearfix {
+    height: 1%;
+}
+
+.clearfix {
+    display: block;
+}
+
+#container {
+    border: 1px solid #555;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+}
+
+.sliding-bg {
+    display: inline-block;
+    width: 1000px;
+    height: 500px;
+    background: url('background.jpg') no-repeat;
+    background-size: 1000px 500px;
+}
+
+.mario {
+    height: 144px;
+    width: 144px;
+    background: url('mario.png') no-repeat;
+    position: absolute;
+    top: 328px;
+    left: 190px;
+}
+
+.mario.run-0 {
+    background-position: 0 -290px;
+}
+
+.mario.run-1 {
+    background-position: -144px -290px;
+}
+
+.mario.run-2 {
+    background-position: -288px -290px;
+}
+
+.mario.run-3 {
+    background-position: -432px -290px;
+}
+
+.mario.run-4 {
+    background-position: -576px -290px;
+}
+
+.mario.run-5 {
+    background-position: -720px -290px;
+}
